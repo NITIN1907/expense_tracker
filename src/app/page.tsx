@@ -32,6 +32,7 @@ export default function Home() {
   const refresh = () => {
     fetchTransactions();
     setEditingTxn(undefined);
+     setReloadKey(prev => prev + 1);
   };
 
   return (
@@ -45,25 +46,29 @@ export default function Home() {
       />
 
     
-      <DashboardCards key={`dashboard-${reloadKey}`} />
+      <DashboardCards key={`dashboard-${reloadKey}`} reloadKey={reloadKey} />
+
 
     
-      <BudgetForm key={`budget-form-${reloadKey}`}  />
+    <BudgetForm key={`budget-form-${reloadKey}`} onBudgetSaved={() => setReloadKey(prev => prev + 1)} />
+
 
    
       <BudgetComparisonChart reloadKey={reloadKey} />
 
 
      
-      <SpendingInsights key={`spending-${reloadKey}`} />
+      <SpendingInsights key={`spending-${reloadKey}`}reloadKey={reloadKey} />
 
       
-      <MonthlyChart key={`chart-${reloadKey}`} />
+      <MonthlyChart key={`chart-${reloadKey}`}  reloadKey={reloadKey}/>
 
-      <CategoryPieChart key={`pie-${reloadKey}`} />
+      <CategoryPieChart key={`pie-${reloadKey}`} reloadKey={reloadKey} />
+
 
       
-      <TransactionList key={`list-${reloadKey}`} onEdit={setEditingTxn} />
+      <TransactionList key={`list-${reloadKey}`} reloadKey={reloadKey} onEdit={setEditingTxn} />
+
     </main>
   );
 }

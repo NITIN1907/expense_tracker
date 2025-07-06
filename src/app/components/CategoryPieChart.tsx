@@ -7,7 +7,7 @@ import { CATEGORIES } from '../constants/categories';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8A2BE2', '#FF6666', '#A9A9A9', '#2ECC71'];
 
-export default function CategoryPieChart() {
+export default function CategoryPieChart({ reloadKey }: { reloadKey: number }) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [data, setData] = useState<{ category: string; total: number }[]>([]);
 
@@ -17,7 +17,7 @@ export default function CategoryPieChart() {
       .then((data: Transaction[]) => {
         setTransactions(data);
       });
-  }, []);
+  }, [reloadKey]);
 
   useEffect(() => {
     const thisMonth = new Date().getMonth();

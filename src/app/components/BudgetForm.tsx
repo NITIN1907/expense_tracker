@@ -5,7 +5,10 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CATEGORIES } from '../constants/categories';
 
-export default function BudgetForm() {
+type Props = {
+  onBudgetSaved: () => void;
+};
+export default function BudgetForm({ onBudgetSaved }: Props) {
   const [budgets, setBudgets] = useState<Record<string, number>>({});
 
 
@@ -49,7 +52,7 @@ export default function BudgetForm() {
     setBudgets(b)
 
     alert('Budgets saved successfully.');
-  
+  onBudgetSaved();
   };
 
   return (

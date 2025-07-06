@@ -17,7 +17,7 @@ function formatMonthYear(dateStr: string) {
   return `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
 }
 
-export default function MonthlyChart() {
+export default function MonthlyChart({ reloadKey }: { reloadKey: number }) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [monthlyData, setMonthlyData] = useState<{ id: string; month: string; total: number }[]>([]);
 
@@ -25,7 +25,7 @@ export default function MonthlyChart() {
     fetch('/api/transactions')
       .then((res) => res.json())
       .then((data: Transaction[]) => setTransactions(data));
-  }, []);
+  }, [reloadKey]);
 
   useEffect(() => {
     const map = new Map<string, number>();

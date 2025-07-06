@@ -11,7 +11,7 @@ type BudgetEntry = {
   amount: number;
 };
 
-export default function SpendingInsights() {
+export default function SpendingInsights({ reloadKey }: { reloadKey: number }) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [budgets, setBudgets] = useState<BudgetEntry[]>([]);
 
@@ -23,7 +23,7 @@ export default function SpendingInsights() {
     fetch('/api/budgets')
       .then((res) => res.json())
       .then((data) => setBudgets(data));
-  }, []);
+  }, [reloadKey]);
 
   const thisMonth = new Date().getMonth();
   const thisYear = new Date().getFullYear();

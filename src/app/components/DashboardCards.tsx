@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Transaction } from './TransactionForm';
 import { Card, CardContent } from '@/components/ui/card';
 
-export default function DashboardCards() {
+export default function DashboardCards({ reloadKey }: { reloadKey: number }) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [totalThisMonth, setTotalThisMonth] = useState(0);
   const [recent, setRecent] = useState<Transaction[]>([]);
@@ -15,7 +15,7 @@ export default function DashboardCards() {
       .then((data: Transaction[]) => {
         setTransactions(data);
       });
-  }, []);
+  }, [reloadKey]);
 
   useEffect(() => {
     const thisMonth = new Date().getMonth();
@@ -52,7 +52,7 @@ export default function DashboardCards() {
         </CardContent>
       </Card>
 
-      {/* Recent Transactions Card */}
+     
       <Card>
         <CardContent className="p-6">
           <p className="text-sm text-muted-foreground mb-2">Recent Transactions</p>

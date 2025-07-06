@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Pencil, Trash2, CalendarDays, Tag } from "lucide-react";
 type Props = {
-    onEdit: (txn: Transaction) => void;
+  onEdit: (txn: Transaction) => void;
+  reloadKey: number; // ← NEW
 };
 
-export default function TransactionList({ onEdit }: Props) {
+
+export default function TransactionList({ onEdit,reloadKey }: Props) {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -39,7 +41,7 @@ export default function TransactionList({ onEdit }: Props) {
 
     useEffect(() => {
         fetchTransactions();
-    }, []);
+    }, [reloadKey]);
 
     return (
         <div className="mt-10 w-full max-w-3xl mx-auto space-y-6">
